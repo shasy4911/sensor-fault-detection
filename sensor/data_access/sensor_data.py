@@ -29,13 +29,9 @@ class SensorData:
             return pd.DataFrame of collection
             """
             if database_name is None:
-                print("Inside if block sensor_data.py")
                 collection = self.mongo_client.database[collection_name]
-                print("Sensor Data If block collection: ",collection)
             else:
-                print("Inside else block sensor_data.py")
                 collection = self.mongo_client[database_name][collection_name]
-                print("Sensor Data Else block collection: ",collection)
             df = pd.DataFrame(list(collection.find()))
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis=1)
